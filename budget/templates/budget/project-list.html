@@ -1,1 +1,15 @@
-<h1>Project List View</h1>
+{% extends 'budget/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="noproject-wrapper center">
+        <h3 class="grey-text">Sorry, you don't have any project yet.</h3>
+        <a href="" class="btn-large grey"
+           style="display: flex; flex-direction: row; gap: 9px; align-items: center; justify-content: center; text-align: center; width: 250px; margin: 0 auto;">
+            <span class="material-symbols-outlined" style="vertical-align: middle;">
+                add_circle
+            </span>                            
+            <span class="bold" style="display: inline-block;">Add project</span>
+        </a>
+    </div>
+</div>
+{% endblock %}

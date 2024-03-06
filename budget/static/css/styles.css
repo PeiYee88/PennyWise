@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+
+/* General */
+html {
+  font-family: "Madimi One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #E0E0E0;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/* Project List */
+.noproject-wrapper {
+    margin-top: 250px;
+    padding: 80px 0px;
+    border: 6px solid #9e9e9e;
+    border-style: dashed
+}
+
+.noproject-wrapper h3 {
+    padding: 10px;
+    margin-bottom: 50px
+}
