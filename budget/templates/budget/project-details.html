@@ -70,7 +70,8 @@
             <label for="amount">Amount</label>
             <input name="amount" id="amount">
 
-            <select name="category">
+            <select name="category" class="browser-default" style="color: lightslategray; font-size: smaller; margin-bottom: 10px; margin-top: 10px;">
+                <option value="" disabled selected class="light-text">Select Category</option>
                 {% for category in category_list %}
                 <option>{{ category.name }}</option>
                 {% endfor %}
@@ -87,7 +88,7 @@
     var elem = document.querySelector('.modal')
     var instance = M.Modal.init(elem)
 
-    var elem = document.querySelector('.select')
+    var elem = document.querySelectorAll('.select')
     var instance = M.FormSelect.init(elem)
 
 </script>

@@ -11,9 +11,10 @@ def project_list(request):
 
 def project_details(request, project_slug):
         project = get_object_or_404(Project, slug=project_slug)
+        category_list = Category.objects.filter(project=project)
         #pass variable to html template here
         return render(request, 'budget/project-details.html',
-                      {'project': project, 'expense_list': project.expenses.all()})
+                      {'project': project, 'expense_list': project.expenses.all(), 'category_list': category_list})
 
 class ProjectCreateView(CreateView):
       model = Project
