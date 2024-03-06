@@ -12,6 +12,9 @@ from django.http import JsonResponse
 
 def project_list(request):
     project_list = Project.objects.all()
+    if project_list is  None:
+        return render(request, 'budget/add.html')
+
     return render(request, 'budget/project-list.html', {'project_list': project_list})
 
 def project_details(request, project_slug):
