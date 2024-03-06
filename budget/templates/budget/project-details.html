@@ -12,13 +12,20 @@
             <div class="col s12 m6 14">
                 <div class="card-panel">
                     <h6 class="bold">Budget Left</h6>
-                    <h1>$3000k</h1>
+                    {% if project.budget_left > 0 %}
+                    <h1 class="bold green-text">${{ project.budget_left }}</h1>
+                    {% elif project.budget_left == 0 %}
+                    <h1 class="bold orange-text">${{ project.budget_left }}</h1>
+                    {% else %}
+                    <h1 class="bold red-text">${{ project.budget_left }}</h1>
+                    {% endif %}
+
                 </div>
             </div> 
             <div class="col s12 m6 14">
                 <div class="card-panel">
-                    <h6 class="bold">Total Transaction</h6>
-                    <h1>$3000k</h1>
+                    <h6 class="bold">Total Transactions</h6>
+                    <h1>{{ project.total_transactions }}</h1>
                 </div>
             </div>            
         </div>
@@ -45,7 +52,7 @@
                         <div class="col s1">
                             <span class="title">{{ expense.category.name }}</span>
                         </div>
-                        <a style="color: black; cursor: default;" onclick="deleteExpense('{{ expense.id }}')" onmouseover="this.style.color='darkred'; this.style.cursor='pointer'" onmouseout="this.style.color='black'; this.style.cursor='default'">
+                        <a style="color: black; cursor: default;" data-id="{{ expense.id }}" onclick="deleteExpense(this)" onmouseover="this.style.color='darkred'; this.style.cursor='pointer'" onmouseout="this.style.color='black'; this.style.cursor='default'">
                             <span class="material-symbols-outlined red right">
                             close
                             </span>
@@ -91,7 +98,10 @@
     var elem = document.querySelectorAll('.select')
     var instance = M.FormSelect.init(elem)
 
-    function deleteExpense(id){
+    function deleteExpense(e){
+
+        let id = e.dataset.id
+        e.closest('li').remove()
 
         fetch('', {
             method:'DELETE',
