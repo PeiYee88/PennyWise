@@ -8,6 +8,7 @@ def project_list(request):
 
 def project_details(request, project_slug):
         project = get_object_or_404(Project, slug=project_slug)
+        #pass variable to html template here
         return render(request, 'budget/project-details.html',
                       {'project': project, 'expense_list': project.expenses.all()})
 
