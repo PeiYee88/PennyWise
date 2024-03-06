@@ -11,7 +11,8 @@ from django.http import JsonResponse
 # Create your views here.
 
 def project_list(request):
-    return render(request, 'budget/project-list.html')
+    project_list = Project.objects.all()
+    return render(request, 'budget/project-list.html', {'project_list': project_list})
 
 def project_details(request, project_slug):
         project = get_object_or_404(Project, slug=project_slug)
@@ -43,10 +44,6 @@ def project_details(request, project_slug):
               id = json.loads(request.body)['id']
               expense = get_object_or_404(Expense, id=id)
               expense.delete()
-
-              script = '<script>window.location.reload();</script>'
-
-            #   return HttpResponse(script)
               return JsonResponse({'success': True})
 
         return HttpResponseRedirect(request.path)

@@ -1,15 +1,36 @@
 {% extends 'budget/base.html' %}
 {% block content %}
 <div class="container">
-    <div class="noproject-wrapper center">
-        <h3 class="grey-text">Sorry, you don't have any project yet.</h3>
-        <a href="" class="btn-large grey"
-           style="display: flex; flex-direction: row; gap: 9px; align-items: center; justify-content: center; text-align: center; width: 250px; margin: 0 auto;">
-            <span class="material-symbols-outlined" style="vertical-align: middle;">
-                add_circle
-            </span>                            
-            <span class="bold" style="display: inline-block;">Add project</span>
-        </a>
+    <h1>My Projects</h1>
+    <hr>
+
+    {% for project in project_list %}
+
+    <div class="row">
+        <div class="col s12 13">
+            <div class="card-panel">
+                <h5>
+                    {{ project.name }}
+                </h5>
+                <a href="{% url 'detail' project.slug %}" class="btn">Visit</a>
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="noproject-wrapper center">
+            <h3 class="grey-text">Sorry, you don't have any project yet.</h3>
+            <a href="" class="btn-large grey"
+               style="display: flex; flex-direction: row; gap: 9px; align-items: center; justify-content: center; text-align: center; width: 250px; margin: 0 auto;">
+                <span class="material-symbols-outlined" style="vertical-align: middle;">
+                    add_circle
+                </span>                            
+                <span class="bold" style="display: inline-block;">Add project</span>
+            </a>
+        </div>
+
+        {% endfor %}
     </div>
+
+    
 </div>
 {% endblock %}
