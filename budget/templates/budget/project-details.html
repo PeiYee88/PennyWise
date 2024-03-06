@@ -45,7 +45,7 @@
                         <div class="col s1">
                             <span class="title">{{ expense.category.name }}</span>
                         </div>
-                        <a onclick="deleteExpense('{{ expense.id }}')">
+                        <a style="color: black; cursor: default;" onclick="deleteExpense('{{ expense.id }}')" onmouseover="this.style.color='darkred'; this.style.cursor='pointer'" onmouseout="this.style.color='black'; this.style.cursor='default'">
                             <span class="material-symbols-outlined red right">
                             close
                             </span>
