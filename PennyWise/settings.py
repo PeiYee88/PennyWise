@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,13 @@ SECRET_KEY = 'django-insecure-k!pv+u62a+8qp-%*f-o^!nkzr3j%x1$j!4*mll&5s%km(yx1bw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = []
+
+if os.environ.get('DJANGO_ENV') == 'local':
+    ALLOWED_HOSTS.append('localhost')
+
+if os.environ.get('DJANGO_ENV') == 'production':
+    ALLOWED_HOSTS.append('penny-wise-git-master-melissa-cheng-pei-yees-projects.vercel.app')
 
 
 # Application definition
