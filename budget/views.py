@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Project, Category
+from .models import Project, Category, Expense
 from django.views.generic import CreateView
 from django.utils.text import slugify
 from django.http import HttpResponseRedirect
+from .forms import ExpenseForm
 
 # Create your views here.
 
@@ -11,10 +12,32 @@ def project_list(request):
 
 def project_details(request, project_slug):
         project = get_object_or_404(Project, slug=project_slug)
-        category_list = Category.objects.filter(project=project)
+
+        if request.method == 'GET':
+            category_list = Category.objects.filter(project=project)
         #pass variable to html template here
-        return render(request, 'budget/project-details.html',
+            return render(request, 'budget/project-details.html',
                       {'project': project, 'expense_list': project.expenses.all(), 'category_list': category_list})
+        
+        elif request.method == 'POST':
+              
+              form = ExpenseForm(request.POST)
+              if form.is_valid():
+                    title = form.cleaned_data['title']
+                    amount = form.cleaned_data['amount']
+                    category_name = form.cleaned_data['category']
+
+                    category = get_object_or_404(Category, project=project, name=category_name)
+
+                    Expense.objects.create(
+                          project=project,
+                          title=title,
+                          amount=amount,
+                          category=category
+                    ).save()
+
+        return HttpResponseRedirect(request.path)
+
 
 class ProjectCreateView(CreateView):
       model = Project
