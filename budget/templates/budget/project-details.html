@@ -45,8 +45,8 @@
                         <div class="col s1">
                             <span class="title">{{ expense.category.name }}</span>
                         </div>
-                    <a href="" >
-                        <span class="material-symbols-outlined red right">
+                        <a onclick="deleteExpense('{{ expense.id }}')">
+                            <span class="material-symbols-outlined red right">
                             close
                             </span>
                     </a>
@@ -90,6 +90,32 @@
 
     var elem = document.querySelectorAll('.select')
     var instance = M.FormSelect.init(elem)
+
+    function deleteExpense(id){
+
+        fetch('', {
+            method:'DELETE',
+            headers: {
+                'X-CSRFToken' : '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                'id': id
+            }),
+            credentials: 'same-origin',
+        })
+        .then(response => response.json())
+        .then(data => {
+        if (data.success) {
+            console.log('Expense deleted successfully');
+            window.location.reload();
+        } else {
+            console.error('Failed to delete expense');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+    }
 
 </script>
 
