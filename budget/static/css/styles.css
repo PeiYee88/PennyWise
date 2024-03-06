@@ -25,6 +25,14 @@ html {
     margin-bottom: 50px
 }
 
+/* Project add */
+form ul li.category {
+    display: inline-block;
+    background-color: white;
+    padding: 5px, 10px;
+    margin-right: 5px;
+}
+
 /* Project Detail Statistics */
 /* .section-stats .card-panel {
     margin: 8px;
